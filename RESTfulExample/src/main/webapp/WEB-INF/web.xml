@@ -21,26 +21,4 @@
 
 
 
-    <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>com.mkyong.rest.Register</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/servlet/Register</url-pattern>
-    </servlet-mapping>
-
-    <!--
-        <servlet>
-            <servlet-name>FirstTest</servlet-name>
-            <servlet-class>com.mkyong.rest.HelloWorldService</servlet-class>
-        </servlet>
-        <servlet-mapping>
-            <servlet-name>FirstTest</servlet-name>
-            <url-pattern>submitTest</url-pattern>
-        </servlet-mapping>>
-    -->
-
-
 </web-app>
