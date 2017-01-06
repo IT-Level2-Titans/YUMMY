@@ -6,13 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!--This page is for only testing purposes-->
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<h5><%= request.getParameter("returnmsg1") %></h5>
-</form>
+
+<h2><%= request.getParameter("queryOutput")%></h2>
+<c:if test="${not empty queryOutput}">
+
+    <ul>
+        <c:forEach var="queryOutput" items="${queryOutput}">
+            <li>${queryOutput}</li>
+        </c:forEach>
+    </ul>
+
+</c:if>
 
 </body>
 </html>

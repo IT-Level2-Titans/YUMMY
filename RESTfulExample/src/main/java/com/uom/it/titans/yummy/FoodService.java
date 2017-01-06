@@ -23,6 +23,7 @@ public class FoodService {
 
     /**
      * Test method to see whether web service is working.
+     *
      * @param msg sent as a parameter
      * @return example if msg = hi -> Jersey say : hi
      */
@@ -42,6 +43,7 @@ public class FoodService {
     /**
      * TODO
      * http://localhost:8080/rest/foodservice/foodWise/fo=Pizza&ci=Moratuwa
+     *
      * @param Food_Item
      * @param Current_City
      * @return
@@ -116,9 +118,11 @@ public class FoodService {
 
 
     }
+
     /**
      * TODO
      * http://localhost:8080/rest/foodservice/restaurantWise/res=PizzaHutMoratuwa
+     *
      * @param ResName
      * @return
      * @throws UnknownHostException
@@ -168,7 +172,8 @@ public class FoodService {
     /**
      * TODO
      * http://localhost:8080/rest/foodservice/loadallrestaurants
-     * @return
+     *
+     * @return queryOutput=%5BPizzaHutMoratuwa,+Moratuwa,+PizzaHutKatubedda,+Katubedda,+PizzaHutDehiwala,+Dehiwala%5D
      * @throws UnknownHostException
      */
     @Path("/loadallrestaurants")
@@ -182,27 +187,31 @@ public class FoodService {
         DBCollection mycollec = mydb.getCollection("Restaurant");
 
         BasicDBObject whereQuery = new BasicDBObject();
+        ArrayList<String> queryOutput = new ArrayList<String>(1000);
 
         int i = 1;
 
         while (i > 0) {
 
             String result = "R" + i;
-            String rname = "R" + i;
-            String ncity = "C" + i;
+            // String rname = "R" + i;
+            // String ncity = "C" + i;
 
             try {
 
                 whereQuery.put("Restaurant_ID", result);
                 DBCursor cursor = mycollec.find(whereQuery);
                 BasicDBObject obj = (BasicDBObject) cursor.next();
+
                 String resname = obj.getString("Restaurant_Name");
+
+                queryOutput.add(resname);
+
                 String nearestcity = obj.getString("NearestCity");
+
+                queryOutput.add(nearestcity);
                 i++;
 
-
-                URI uri = UriBuilder.fromPath("http://localhost:8080/RatingHome.jsp").queryParam(rname, resname).queryParam(ncity, nearestcity).build();
-                return Response.seeOther(uri).build();
 
             } catch (Exception e) {
                 break;
@@ -210,8 +219,9 @@ public class FoodService {
 
 
         }
-        String finalmsg = "All Restaurants";
-        URI uri = UriBuilder.fromPath("http://localhost:8080/RatingHome.jsp").queryParam("finalmsg", finalmsg).build();
+
+
+        URI uri = UriBuilder.fromPath("http://localhost:8080/test1.jsp").queryParam("queryOutput", queryOutput).build();
         return Response.seeOther(uri).build();
     }
 
@@ -219,6 +229,7 @@ public class FoodService {
     /**
      * TODO
      * http://localhost:8080/rest/foodservice/locationWise/loc=Katubedda
+     *
      * @param ResLoc
      * @return
      * @throws UnknownHostException
@@ -264,8 +275,10 @@ public class FoodService {
 
 
     }
+
     /**
      * TODO
+     *
      * @param msg
      * @return
      * @throws UnknownHostException
@@ -288,6 +301,7 @@ public class FoodService {
     /**
      * TODO
      * http://localhost:8080/rest/foodservice/images
+     *
      * @return
      * @throws UnknownHostException
      */
@@ -323,7 +337,8 @@ public class FoodService {
 
 
     }
-//Still use testing purposes
+
+    //Still use testing purposes
     public static void main(String[] args) throws UnknownHostException {
 
         MongoClient mongo = new MongoClient("localhost", 27017);
@@ -333,12 +348,13 @@ public class FoodService {
         BasicDBObject whereQuery = new BasicDBObject();
 
         int i = 1;
+        ArrayList<String> queryOutput = new ArrayList<String>(1000);
 
         while (i > 0) {
 
             String result = "R" + i;
-            String rname = "R" + i;
-            String ncity = "C" + i;
+            // String rname = "R" + i;
+            // String ncity = "C" + i;
 
             try {
 
@@ -346,7 +362,9 @@ public class FoodService {
                 DBCursor cursor = mycollec.find(whereQuery);
                 BasicDBObject obj = (BasicDBObject) cursor.next();
                 String resname = obj.getString("Restaurant_Name");
+                queryOutput.add(resname);
                 String nearestcity = obj.getString("NearestCity");
+                queryOutput.add(nearestcity);
                 i++;
 
                 System.out.print(resname + " " + nearestcity);
@@ -356,6 +374,9 @@ public class FoodService {
                 break;
             }
 
+        }
+        for (String str : queryOutput) {
+            System.out.println("String = " + str);
         }
 
 
