@@ -96,8 +96,7 @@
         </div>
 
         <div class="col-md=8">
-            <div
-            " div id="dvMap">
+            <div " div id="dvMap">
             <script type="text/javascript"
                     src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
             <script type="text/javascript">
@@ -196,7 +195,7 @@
                 <div class="navbar-header">
                     <!--<a class="navbar-brand" href="#"><img alt="Brand" src="images/logo1.png" height="80px" width="160px" ></a>-->
                     <a class="navbar-brand" href="#"><img alt="Brand" src="images/logo1.png" height="40px"></a>
-                    <a class="navbar-brand" href="#"><i><b>YUmmy</b><i></a>
+                    <a class="navbar-brand" href="#"><i><b>YUmmy</b></i></a>
                 </div>
                 <div class="navd">
                     <ul class="nav navbar-nav">
